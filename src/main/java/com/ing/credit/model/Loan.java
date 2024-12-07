@@ -5,9 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.Instant;
@@ -22,7 +20,8 @@ public class Loan {
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
     private Double loanAmount;
-    private Integer numberOfInstallment;
+    private Installment numberOfInstallment;
+    private Double interestRate;
 
     @CreatedDate
     private Instant createdDate = Instant.now();
@@ -43,14 +42,6 @@ public class Loan {
         this.customer = customer;
     }
 
-    public Integer getNumberOfInstallment() {
-        return numberOfInstallment;
-    }
-
-    public void setNumberOfInstallment(Integer numberOfInstallment) {
-        this.numberOfInstallment = numberOfInstallment;
-    }
-
     public Instant getCreatedDate() {
         return createdDate;
     }
@@ -65,5 +56,21 @@ public class Loan {
 
     public void setLoanAmount(Double loanAmount) {
         this.loanAmount = loanAmount;
+    }
+
+    public Double getInterestRate() {
+        return interestRate;
+    }
+
+    public void setInterestRate(Double interestRate) {
+        this.interestRate = interestRate;
+    }
+
+    public Installment getNumberOfInstallment() {
+        return numberOfInstallment;
+    }
+
+    public void setNumberOfInstallment(Installment numberOfInstallment) {
+        this.numberOfInstallment = numberOfInstallment;
     }
 }

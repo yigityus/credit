@@ -1,15 +1,23 @@
 package com.ing.credit.controller;
 
+import com.ing.credit.service.CustomerService;
+import com.ing.credit.service.dto.CustomerDto;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.Instant;
+import java.util.List;
 
 @RestController
 public class CustomerController {
 
-    @GetMapping("/c1")
-    public String c1() {
-        return Instant.now().toString();
+    private final CustomerService customerService;
+
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
+    }
+
+    @GetMapping("/customers")
+    public List<CustomerDto> c1() {
+        return customerService.findAll();
     }
 }

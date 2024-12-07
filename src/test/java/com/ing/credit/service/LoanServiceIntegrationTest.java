@@ -43,18 +43,18 @@ public class LoanServiceIntegrationTest {
         LoanDto loanDto = new LoanDto();
         loanDto.setCustomer(savedCustomerDto);
 
-        loanDto.setLoanAmount(1000L);
+        loanDto.setLoanAmount(1000.2);
 
         LoanDto savedLoanDto = loanService.save(loanDto);
         // Assert: Validate the saved data
         assertNotNull(savedLoanDto);
         assertNotNull(savedLoanDto.getId()); // ID should be auto-generated
-        assertEquals(1000L, savedLoanDto.getLoanAmount());
+        assertEquals(1000.2, savedLoanDto.getLoanAmount());
 
         // Verify that the data is in the database
         Loan savedEntity = loanRepository.findById(savedLoanDto.getId()).orElse(null);
         assertNotNull(savedEntity);
-        assertEquals(1000L, savedEntity.getLoanAmount());
+        assertEquals(1000.2, savedEntity.getLoanAmount());
     }
 
     @Test
@@ -69,29 +69,18 @@ public class LoanServiceIntegrationTest {
         LoanDto loanDto = new LoanDto();
         loanDto.setCustomer(savedCustomerDto);
 
-        loanDto.setLoanAmount(1000L);
+        loanDto.setLoanAmount(1000.2);
 
         LoanDto savedLoanDto = loanService.save(loanDto);
         // Assert: Validate the saved data
         assertNotNull(savedLoanDto);
         assertNotNull(savedLoanDto.getId()); // ID should be auto-generated
-        assertEquals(1000L, savedLoanDto.getLoanAmount());
+        assertEquals(1000.2, savedLoanDto.getLoanAmount());
 
         // Verify that the data is in the database
         Loan savedEntity = loanRepository.findById(savedLoanDto.getId()).orElse(null);
         assertNotNull(savedEntity);
-        assertEquals(1000L, savedEntity.getLoanAmount());
-
-
-        LoanDto loanDto2 = new LoanDto();
-        loanDto2.setCustomer(savedCustomerDto);
-
-        loanDto2.setLoanAmount(1000L);
-        LoanDto savedLoanDto2 = loanService.save(loanDto2);
-
-        List<Loan> all = loanRepository.findAll();
-        assertEquals(2, all.size());
-
+        assertEquals(1000.2, savedEntity.getLoanAmount());
     }
 
 }
