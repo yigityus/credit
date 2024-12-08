@@ -1,9 +1,9 @@
 package com.ing.credit.service;
 
+import com.ing.credit.config.Samples;
 import com.ing.credit.model.Customer;
 import com.ing.credit.repository.CustomerRepository;
 import com.ing.credit.service.dto.CustomerDto;
-import com.ing.credit.service.impl.CustomerServiceImpl;
 import com.ing.credit.service.mapper.CustomerMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +28,7 @@ public class CustomerServiceIntegrationTest {
     void save_ShouldSaveCustomerAndReturnDto() {
 
         // Arrange: Create a CustomerDto
-        CustomerDto customerDto = new CustomerDto();
-        customerDto.setName("John Doe");
-        customerDto.setSurname("Good Luck");
+        CustomerDto customerDto = Samples.customer();
 
         // Act: Call the save method
         CustomerDto savedCustomerDto = customerService.save(customerDto);
@@ -38,11 +36,11 @@ public class CustomerServiceIntegrationTest {
         // Assert: Validate the saved data
         assertNotNull(savedCustomerDto);
         assertNotNull(savedCustomerDto.getId()); // ID should be auto-generated
-        assertEquals("John Doe", savedCustomerDto.getName());
+        assertEquals("Jane", savedCustomerDto.getName());
 
         // Verify that the data is in the database
         Customer savedEntity = customerRepository.findById(savedCustomerDto.getId()).orElse(null);
         assertNotNull(savedEntity);
-        assertEquals("John Doe", savedEntity.getName());
+        assertEquals("Jane", savedEntity.getName());
     }
 }

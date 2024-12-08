@@ -1,12 +1,15 @@
 package com.ing.credit.service;
 
+import com.ing.credit.config.Samples;
 import com.ing.credit.model.Loan;
+import com.ing.credit.repository.CustomerRepository;
 import com.ing.credit.repository.LoanRepository;
 import com.ing.credit.service.dto.CustomerDto;
 import com.ing.credit.service.dto.LoanDto;
 import com.ing.credit.service.impl.CustomerServiceImpl;
 import com.ing.credit.service.impl.LoanServiceImpl;
 import com.ing.credit.service.mapper.LoanMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,58 +32,30 @@ public class LoanServiceIntegrationTest {
     private LoanRepository loanRepository;
 
     @Autowired
-    private LoanMapper loanMapper;
+    private CustomerRepository customerRepository;
 
-    @Test
-    void save_ShouldSaveLoanAndReturnDto() {
-
-        CustomerDto customerDto = new CustomerDto();
-        customerDto.setName("John Doe");
-
-        // Act: Call the save method
-        CustomerDto savedCustomerDto = customerService.save(customerDto);
-
-        LoanDto loanDto = new LoanDto();
-        loanDto.setCustomer(savedCustomerDto);
-
-        loanDto.setLoanAmount(1000.2);
-
-        LoanDto savedLoanDto = loanService.save(loanDto);
-        // Assert: Validate the saved data
-        assertNotNull(savedLoanDto);
-        assertNotNull(savedLoanDto.getId()); // ID should be auto-generated
-        assertEquals(1000.2, savedLoanDto.getLoanAmount());
-
-        // Verify that the data is in the database
-        Loan savedEntity = loanRepository.findById(savedLoanDto.getId()).orElse(null);
-        assertNotNull(savedEntity);
-        assertEquals(1000.2, savedEntity.getLoanAmount());
+    @BeforeEach
+    public void init() {
+        loanRepository.deleteAll();
+        customerRepository.deleteAll();
     }
 
     @Test
-    void save_ShouldSaveLoanAndReturnDtoWithMultipleLoan() {
-
-        CustomerDto customerDto = new CustomerDto();
-        customerDto.setName("John Doe");
-
+    void save_ShouldSaveLoanAndReturnDto() {
         // Act: Call the save method
-        CustomerDto savedCustomerDto = customerService.save(customerDto);
-
-        LoanDto loanDto = new LoanDto();
-        loanDto.setCustomer(savedCustomerDto);
-
-        loanDto.setLoanAmount(1000.2);
-
-        LoanDto savedLoanDto = loanService.save(loanDto);
+        CustomerDto customer = customerService.save(Samples.customer());
+        LoanDto loan = Samples.loan();
+        loan.setCustomer(customer);
+        LoanDto savedLoanDto = loanService.save(loan);
         // Assert: Validate the saved data
         assertNotNull(savedLoanDto);
         assertNotNull(savedLoanDto.getId()); // ID should be auto-generated
-        assertEquals(1000.2, savedLoanDto.getLoanAmount());
+        assertEquals(1000.00, savedLoanDto.getLoanAmount());
 
         // Verify that the data is in the database
         Loan savedEntity = loanRepository.findById(savedLoanDto.getId()).orElse(null);
         assertNotNull(savedEntity);
-        assertEquals(1000.2, savedEntity.getLoanAmount());
+        assertEquals(1000.00, savedEntity.getLoanAmount());
     }
 
 }
