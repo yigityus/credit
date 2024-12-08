@@ -1,9 +1,8 @@
 package com.ing.credit.controller;
 
-import com.ing.credit.model.LoanInstallment;
 import com.ing.credit.service.LoanService;
 import com.ing.credit.service.dto.LoanDto;
-import com.ing.credit.service.dto.LoanInstallmentDto;
+import com.ing.credit.service.dto.InstallmentDto;
 import com.ing.credit.service.dto.validator.CreditLimit;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +21,7 @@ public class LoanController {
     }
 
     @PostMapping("/loan")
-    public List<LoanInstallmentDto> create(@RequestBody @Validated @CreditLimit LoanDto loanDto) {
+    public List<InstallmentDto> create(@RequestBody @Validated @CreditLimit LoanDto loanDto) {
         return loanService.create(loanDto);
     }
 }

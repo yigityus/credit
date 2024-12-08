@@ -1,12 +1,11 @@
 package com.ing.credit.service.dto;
 
-import com.ing.credit.model.Installment;
+import com.ing.credit.model.InstallmentCount;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
-import java.time.Instant;
 import java.time.LocalDate;
 
 public class LoanDto {
@@ -20,7 +19,7 @@ public class LoanDto {
     @DecimalMin("0.1")
     @DecimalMax("0.5")
     private Double interestRate;
-    private Installment numberOfInstallment;
+    private InstallmentCount numberOfInstallment;
     private LocalDate createdDate;
 
     public Long getId() {
@@ -71,11 +70,11 @@ public class LoanDto {
         this.customerId = customerId;
     }
 
-    public Installment getNumberOfInstallment() {
+    public InstallmentCount getNumberOfInstallment() {
         return numberOfInstallment;
     }
 
-    public void setNumberOfInstallment(Installment numberOfInstallment) {
+    public void setNumberOfInstallment(InstallmentCount numberOfInstallment) {
         this.numberOfInstallment = numberOfInstallment;
     }
 }

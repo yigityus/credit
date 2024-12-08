@@ -38,4 +38,10 @@ public class CustomerServiceImpl implements CustomerService {
         }
         return customerMapper.toDto(optionalCustomer.get());
     }
+
+    public void adjustCreditBalance(Long customerId, Double amount) {
+        CustomerDto customerDto = findById(customerId);
+        customerDto.setUsedCreditLimit(customerDto.getUsedCreditLimit() + amount);
+        save(customerDto);
+    }
 }

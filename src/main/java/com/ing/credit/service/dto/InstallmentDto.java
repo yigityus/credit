@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class LoanInstallmentDto {
+public class InstallmentDto {
     private Long id;
     private Long loanId;
     @JsonIgnore
@@ -14,12 +14,12 @@ public class LoanInstallmentDto {
     private Double paidAmount;
     private LocalDate dueDate;
     private LocalDateTime paymentDate;
-    private Boolean paid;
+    private boolean paid;
 
-    public LoanInstallmentDto() {
+    public InstallmentDto() {
     }
 
-    private LoanInstallmentDto(LoanInstallmentDtoBuilder builder) {
+    private InstallmentDto(LoanInstallmentDtoBuilder builder) {
         this.loanId = builder.loanId;
         this.amount = builder.amount;
         this.dueDate = builder.dueDate;
@@ -73,11 +73,11 @@ public class LoanInstallmentDto {
         this.paymentDate = paymentDate;
     }
 
-    public Boolean getPaid() {
+    public boolean getPaid() {
         return paid;
     }
 
-    public void setPaid(Boolean paid) {
+    public void setPaid(boolean paid) {
         this.paid = paid;
     }
 
@@ -107,8 +107,8 @@ public class LoanInstallmentDto {
             return this;
         }
 
-        public LoanInstallmentDto build(){
-            return new LoanInstallmentDto(this);
+        public InstallmentDto build(){
+            return new InstallmentDto(this);
         }
     }
 }

@@ -19,7 +19,7 @@ public class Loan {
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
     private Double loanAmount;
-    private Installment numberOfInstallment;
+    private InstallmentCount numberOfInstallment;
     private Double interestRate;
 
     @CreatedDate
@@ -65,11 +65,11 @@ public class Loan {
         this.interestRate = interestRate;
     }
 
-    public Installment getNumberOfInstallment() {
+    public InstallmentCount getNumberOfInstallment() {
         return numberOfInstallment;
     }
 
-    public void setNumberOfInstallment(Installment numberOfInstallment) {
+    public void setNumberOfInstallment(InstallmentCount numberOfInstallment) {
         this.numberOfInstallment = numberOfInstallment;
     }
 }
