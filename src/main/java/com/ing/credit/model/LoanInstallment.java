@@ -9,6 +9,8 @@ import jakarta.persistence.ManyToOne;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class LoanInstallment {
@@ -22,8 +24,8 @@ public class LoanInstallment {
     private Double amount;
     private Double paidAmount;
 
-    private Instant dueDate;
-    private Instant paymentDate;
+    private LocalDate dueDate;
+    private LocalDateTime paymentDate;
     private Boolean paid;
 
     public Long getId() {
@@ -58,19 +60,19 @@ public class LoanInstallment {
         this.paidAmount = paidAmount;
     }
 
-    public Instant getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(Instant dueDate) {
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 
-    public Instant getPaymentDate() {
+    public LocalDateTime getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(Instant paymentDate) {
+    public void setPaymentDate(LocalDateTime paymentDate) {
         this.paymentDate = paymentDate;
     }
 

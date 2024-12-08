@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 import java.time.Instant;
+import java.time.LocalDate;
 
 public class LoanDto {
     private Long id;
@@ -20,7 +21,7 @@ public class LoanDto {
     @DecimalMax("0.5")
     private Double interestRate;
     private Installment numberOfInstallment;
-    private Instant createdDate;
+    private LocalDate createdDate;
 
     public Long getId() {
         return id;
@@ -38,11 +39,11 @@ public class LoanDto {
         this.customer = customer;
     }
 
-    public Instant getCreatedDate() {
+    public LocalDate getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Instant createdDate) {
+    public void setCreatedDate(LocalDate createdDate) {
         this.createdDate = createdDate;
     }
 

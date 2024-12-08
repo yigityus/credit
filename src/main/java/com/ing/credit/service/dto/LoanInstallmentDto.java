@@ -1,16 +1,29 @@
 package com.ing.credit.service.dto;
 
-import java.time.Instant;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class LoanInstallmentDto {
     private Long id;
+    private Long loanId;
+    @JsonIgnore
     private LoanDto loan;
     private Double amount;
     private Double paidAmount;
-
-    private Instant dueDate;
-    private Instant paymentDate;
+    private LocalDate dueDate;
+    private LocalDateTime paymentDate;
     private Boolean paid;
+
+    public LoanInstallmentDto() {
+    }
+
+    private LoanInstallmentDto(LoanInstallmentDtoBuilder builder) {
+        this.loanId = builder.loanId;
+        this.amount = builder.amount;
+        this.dueDate = builder.dueDate;
+    }
 
     public Long getId() {
         return id;
@@ -44,19 +57,19 @@ public class LoanInstallmentDto {
         this.paidAmount = paidAmount;
     }
 
-    public Instant getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(Instant dueDate) {
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 
-    public Instant getPaymentDate() {
+    public LocalDateTime getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(Instant paymentDate) {
+    public void setPaymentDate(LocalDateTime paymentDate) {
         this.paymentDate = paymentDate;
     }
 
@@ -66,5 +79,36 @@ public class LoanInstallmentDto {
 
     public void setPaid(Boolean paid) {
         this.paid = paid;
+    }
+
+    public Long getLoanId() {
+        return loanId;
+    }
+
+    public void setLoanId(Long loanId) {
+        this.loanId = loanId;
+    }
+
+    public static class LoanInstallmentDtoBuilder {
+        private Double amount;
+        private LocalDate dueDate;
+        private Long loanId;
+
+        public LoanInstallmentDtoBuilder amount(Double amount) {
+            this.amount = amount;
+            return this;
+        }
+        public LoanInstallmentDtoBuilder dueDate(LocalDate dueDate) {
+            this.dueDate = dueDate;
+            return this;
+        }
+        public LoanInstallmentDtoBuilder loanId(Long loanId) {
+            this.loanId = loanId;
+            return this;
+        }
+
+        public LoanInstallmentDto build(){
+            return new LoanInstallmentDto(this);
+        }
     }
 }

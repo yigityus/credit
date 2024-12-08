@@ -8,6 +8,7 @@ import com.ing.credit.service.mapper.CustomerMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -27,5 +28,14 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<CustomerDto> findAll() {
         return customerMapper.toDto(customerRepository.findAll());
+    }
+
+    @Override
+    public CustomerDto findById(Long customerId) {
+        Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
+        if (optionalCustomer.isEmpty()) {
+            throw new IllegalArgumentException("Customer is not found!");
+        }
+        return customerMapper.toDto(optionalCustomer.get());
     }
 }

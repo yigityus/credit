@@ -8,14 +8,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import org.springframework.data.annotation.CreatedDate;
 
-import java.time.Instant;
+import java.time.LocalDate;
 
 @Entity
 public class Loan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
@@ -24,7 +23,7 @@ public class Loan {
     private Double interestRate;
 
     @CreatedDate
-    private Instant createdDate = Instant.now();
+    private LocalDate createdDate = LocalDate.now();
 
     public Long getId() {
         return id;
@@ -42,11 +41,11 @@ public class Loan {
         this.customer = customer;
     }
 
-    public Instant getCreatedDate() {
+    public LocalDate getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Instant createdDate) {
+    public void setCreatedDate(LocalDate createdDate) {
         this.createdDate = createdDate;
     }
 

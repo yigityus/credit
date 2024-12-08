@@ -8,5 +8,6 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring", uses = { CustomerMapper.class })
 public interface LoanMapper {
     Loan toEntity(LoanDto dto);
+    @Mapping(source = "customer.id", target = "customerId")
     LoanDto toDto(Loan entity);
 }
