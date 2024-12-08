@@ -1,16 +1,20 @@
 package com.ing.credit.service.dto;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.ing.credit.model.Installment;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 import java.time.Instant;
 
 public class LoanDto {
     private Long id;
+    @NotNull
     private Long customerId;
     private CustomerDto customer;
+    @NotNull
+    @Positive
     private Double loanAmount;
     @DecimalMin("0.1")
     @DecimalMax("0.5")

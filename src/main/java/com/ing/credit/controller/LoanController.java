@@ -1,17 +1,27 @@
 package com.ing.credit.controller;
 
+import com.ing.credit.model.LoanInstallment;
+import com.ing.credit.service.LoanService;
 import com.ing.credit.service.dto.LoanDto;
-import org.springframework.http.ResponseEntity;
+import com.ing.credit.service.dto.validator.CreditLimit;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class LoanController {
 
+    private final LoanService loanService;
+
+    public LoanController(LoanService loanService) {
+        this.loanService = loanService;
+    }
+
     @PostMapping("/loan")
-    public ResponseEntity<LoanDto> create(@RequestBody @Validated LoanDto loanDto) {
-        return ResponseEntity.ok(loanDto);
+    public List<LoanInstallment> create(@RequestBody @Validated @CreditLimit LoanDto loanDto) {
+        return loanService.create(loanDto);
     }
 }
