@@ -1,6 +1,7 @@
 * Obtain a token:
 
-```curl --location 'http://localhost:8080/authenticate' \
+```
+curl --location 'http://localhost:8080/authenticate' \
 --header 'Content-Type: application/json' \
 --data '{
     "username": "admin",
@@ -11,7 +12,7 @@
 
 ```
 curl --location 'http://localhost:8080/customers' \
---header 'Authorization: Bearer <TOKEN>  ' \
+--header 'Authorization: Bearer <TOKEN>'
 ```
 
 
