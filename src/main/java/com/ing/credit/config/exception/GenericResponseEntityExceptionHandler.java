@@ -1,4 +1,4 @@
-package com.ing.credit.exception;
+package com.ing.credit.config.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
